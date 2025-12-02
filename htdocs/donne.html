@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Données météo - ThingSpeak</title>
+  <link rel="stylesheet" href="style_donne.css">
+</head>
+
+<body>
+
+  <header>
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="donne.html">Mesures</a></li>
+            <li><a href=https://thingspeak.mathworks.com/channels/3082413>Historique</a></li>
+            <li><a href="contact.html">Contacts</a></li>
+            <li><a href="soutien.html">Soutenez-nous !</a></li>
+        </ul>
+    </nav>
+</header>
+
+  <h1>Données météo</h1>
+  <div class="bloc-centre">
+    <div class="container">
+        <div><strong>Température :</strong> <span id="temp">Chargement...</span> °C</div>
+        <div><strong>Humidité air:</strong> <span id="hum">Chargement...</span> %</div>
+        <div><strong>Pression atmosphérique:</strong> <span id="press">Chargement...</span> hPa</div>
+        <div><strong>Humidité du sol :</strong> <span id="sol">Chargement...</span> %</div>
+        <div><strong>Luminosité :</strong> <span id="lum">Chargement...</span> lux</div>
+        <div><strong>Pluviométrie :</strong> <span id="pluie">Chargement...</span> mm</div>
+        <div><strong>NPK :</strong> <span id="npk">Chargement...</span></div>
+    </div>
+
+    <div class="container parametres">
+        <h2>Réglage de température</h2>
+        <label for="tempMin">Min :</label>
+        <input type="number" id="tempMin" placeholder="Min °C"> °C
+        <label for="tempMax">Max :</label>
+        <input type="number" id="tempMax" placeholder="Max °C"> °C
+        <br><br>
+
+        <label for="emailInput">Adresse e-mail :</label>
+        <input type="email" id="emailInput" placeholder="exemple@mail.com" style="margin-left: 10px;">
+        
+        <br><br>
+        <button onclick="setTemperatureRange()">Enregistrer</button>
+    </div>
+</div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="script_donne.js"></script>
+</body>
+</html>

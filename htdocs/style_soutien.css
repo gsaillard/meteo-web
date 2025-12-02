@@ -1,0 +1,70 @@
+/* Style général */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* MENU */
+header {
+    position: fixed;        /* Permet de coller le menu en haut */
+    top: 0;
+    width: 100%;
+    z-index: 1000;          /* Le menu passe au-dessus du contenu */
+}
+
+.menu {
+    background-color: #333;
+}
+
+.menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;           /* Menu horizontal */
+    justify-content: center; /* Centre les éléments */
+}
+
+.menu li {
+    margin: 0;
+}
+
+.menu a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    background-color: #444;
+}
+
+/* Contenu (avec marge pour ne pas passer derrière le menu) */
+.content {
+    padding-top: 80px;      /* espace pour ne pas être caché par le menu */
+    width: 90%;
+    margin: auto;
+}
+
+/* Bulle centrale pour présenter un projet */
+.card-project {
+    background: white;                         /* Couleur de la bulle */
+    width: 80%;                                /* Largeur relative */
+    max-width: 900px;                          /* Largeur max */
+    margin: 120px auto 40px auto;              /* Centre + espace sous menu */
+    padding: 40px;                             /* Espace intérieur */
+    
+    border-radius: 20px;                       /* Bords arrondis */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);   /* Ombre douce moderne */
+
+    color: #333;                               /* Couleur du texte */
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4b6ef5, #3ad6a7);
+}

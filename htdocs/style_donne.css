@@ -1,0 +1,113 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #4b6ef5, #3ad6a7);
+}
+header {
+  position: fixed;        /* Permet de coller le menu en haut */
+  top: 0;
+  width: 100%;
+  z-index: 1000;          /* Le menu passe au-dessus du contenu */
+}
+
+.menu {
+  background-color: #333;
+}
+
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;           /* Menu horizontal */
+  justify-content: center; /* Centre les éléments */
+}
+
+.menu li {
+  margin: 0;
+}
+
+.menu a {
+  display: block;
+  padding: 15px 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu a:hover {
+  background-color: #444;
+}
+
+/* Contenu (avec marge pour ne pas passer derrière le menu) */
+.content {
+  padding-top: 80px;      /* espace pour ne pas être caché par le menu */
+  width: 90%;
+  margin: auto;
+}
+
+
+h1 { 
+  margin: 60px auto 40px auto; 
+  color: white;
+  margin-bottom: 30px;
+  text-align: center;
+
+}
+
+.container {
+  margin-left: 20px;
+  display: inline-block;
+  text-align: left;
+  background: white;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.container div {
+  margin-left: 20px;
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.parametres {
+  margin-top: 30px;
+  background: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.parametres input {
+  width: 60px;
+  margin: 5px;
+  padding: 3px;
+}
+
+.parametres button {
+  background: #0078d7;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.parametres button:hover {
+  background: #005fa3;
+}
+
+.bloc-centre {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
