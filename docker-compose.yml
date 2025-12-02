@@ -1,0 +1,10 @@
+services:
+  caddy:
+    image: "caddy/caddy:latest"
+    ports: 
+      - "127.0.0.1:14009:80"
+    volumes:
+      - "./htdocs:/public/:ro"
+      - "./Caddyfile:/Caddyfile:ro"
+    command: "caddy run --config /Caddyfile"
+    restart: "unless-stopped"
