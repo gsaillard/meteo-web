@@ -1,5 +1,6 @@
 body {
   font-family: Arial, sans-serif;
+  /*text-align: center;*/
   background: #f7f7f7;
   padding: 40px;
 }
@@ -16,58 +17,37 @@ h1 {
   padding: 20px 40px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  margin-right: 40px;
-  margin-bottom: 20px;
 }
-
-.page-layout {
-  display: flex;
-  align-items: flex-start;
-  gap: 40px;
-}
-
 
 .container div {
   font-size: 1.2em;
   margin: 10px 0;
 }
 
-
-/* Popup non bloquante */
-#popupAlert {
-  display:none;
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:white;
-  padding:15px 20px;
-  border-radius:10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.2);
-  border-left:5px solid orange;
-  z-index:9999;
-  font-size:1em;
-  max-width:300px;
-}
-
-#popupAlertZone {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 99999;
-}
-
-.popupAlert {
+.parametres {
+  margin-top: 30px;
   background: white;
-  padding: 12px 18px;
-  border-left: 5px solid orange;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  font-size: 1em;
-  min-width: 260px;
+  padding: 15px 25px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
 
+.parametres input {
+  width: 60px;
+  margin: 5px;
+  padding: 3px;
+}
 
+.parametres button {
+  background: #0078d7;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
+.parametres button:hover {
+  background: #005fa3;
+}
