@@ -2,40 +2,99 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Données météo - ThingSpeak</title>
+  <title>Données météo</title>
   <link rel="stylesheet" href="style_donne.css">
 </head>
+
 <body>
+
   <h1>Données météo</h1>
 
-  <div class="container">
-    <div><strong>Température :</strong> <span id="temp">Chargement...</span> °C</div>
-    <div><strong>Humidité air:</strong> <span id="hum">Chargement...</span> %</div>
-    <div><strong>Pression atmosphérique:</strong> <span id="press">Chargement...</span> hPa</div>
-    <div><strong>Humidité du sol :</strong> <span id="sol">Chargement...</span> %</div>
-    <div><strong>Luminosité :</strong> <span id="lum">Chargement...</span> lux</div>
-    <div><strong>Pluviométrie :</strong> <span id="pluie">Chargement...</span> mm</div>
-    <div><strong>NPK :</strong> <span id="npk">Chargement...</span></div>
-  </div>
+  <!-- ✅ AJOUT DU CONTENEUR PRINCIPAL -->
+  <div class="page-layout">
 
-<div class="container">
-  <h2>Réglage de température</h2>
-  <label for="tempMin">Min :</label>
-  <input type="number" id="tempMin" placeholder="Min °C"> °C
-  <label for="tempMax">Max :</label>
-  <input type="number" id="tempMax" placeholder="Max °C"> °C
-  <br><br>
-  
-  <!--email -->
-  <label for="emailInput">Adresse e-mail :</label>
-  <input type="email" id="emailInput" placeholder="exemple@mail.com" style="margin-left: 10px;">
-  
-  <br><br>
-  <button onclick="setTemperatureRange()">Enregistrer</button>
-</div>
+    <!-- ⬅️ Bloc des données météo -->
+    <div class="container">
+      <div><strong>Température :</strong> <span id="temp">Chargement...</span> °C</div>
+      <div><strong>Humidité air:</strong> <span id="hum">Chargement...</span> %</div>
+      <div><strong>Pression atmosphérique:</strong> <span id="press">Chargement...</span> hPa</div>
+      <div><strong>Humidité du sol :</strong> <span id="sol">Chargement...</span> %</div>
+      <div><strong>Luminosité :</strong> <span id="lum">Chargement...</span> lux</div>
+      <div><strong>Pluviométrie :</strong> <span id="pluie">Chargement...</span> mm</div>
+      <div><strong>NPK :</strong> <span id="npk">Chargement...</span></div>
+    </div>
+
+    <!-- ➡️ Bloc des réglages -->
+    
+    <div class="container">
+      <h2>Température</h2>
+      <label>Min :</label>
+      <input type="number" id="tempMin" placeholder="Min °C"> °C
+      <label style="margin-left:20px;">Max :</label>
+      <input type="number" id="tempMax" placeholder="Max °C"> °C
+      <br><br>
+
+      <h2>Humidité de l'air</h2>
+      <label>Min :</label>
+      <input type="number" id="humMin" placeholder="Min %"> %
+      <label style="margin-left:20px;">Max :</label>
+      <input type="number" id="humMax" placeholder="Max %"> %
+      <br><br>
+
+      <h2>Pression atmosphérique</h2>
+      <label>Min :</label>
+      <input type="number" id="pressMin" placeholder="Min hPa">
+      <label style="margin-left:20px;">Max :</label>
+      <input type="number" id="pressMax" placeholder="Max hPa">
+      <br><br>
+
+      <h2>Humidité du sol</h2>
+      <label>Min :</label>
+      <input type="number" id="solMin" placeholder="Min %"> %
+      <label style="margin-left:20px;">Max :</label>
+      <input type="number" id="solMax" placeholder="Max %"> %
+      <br><br>
+
+      <h2>Luminosité</h2>
+      <label>Min :</label>
+      <input type="number" id="lumMin" placeholder="Min lux"> lux
+      <label style="margin-left:20px;">Max :</label>
+      <input type="number" id="lumMax" placeholder="Max lux"> lux
+      <br><br>
+
+      <h2>Pluviométrie</h2>
+      <label>Min :</label>
+      <input type="number" id="pluieMin" placeholder="Min mm"> mm
+      <label style="margin-left:20px;">Max :</label>
+      <input type="number" id="pluieMax" placeholder="Max mm"> mm
+      <br><br>
+
+      <h2>NPK</h2>
+      <label>Min :</label>
+      <input type="number" id="npkMin" placeholder="Min">
+      <label style="margin-left:20px;">Max :</label>
+      <input type="number" id="npkMax" placeholder="Max">
+      <br><br>
+
+      <label>Adresse e-mail :</label>
+      <input type="email" id="emailInput" placeholder="exemple@mail.com" style="margin-left:10px;">
+      <br><br>
+
+      <button onclick="saveSettings()">Enregistrer</button>
+
+    </div>
+
+  </div> <!-- FIN DU PAGE-LAYOUT -->
+
+  <!-- Popup d'alerte -->
+  <div id="popupAlert">
+    <strong>⚠️ Alerte : </strong>
+    <span id="popupMessage"></span>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="script_donne.js"></script>
+  <div id="popupAlertZone"></div>
 
 </body>
 </html>
