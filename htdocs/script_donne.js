@@ -4,9 +4,9 @@ const readAPIKey = "5JB70C4NNIXQ88CS";
 // EmailJS config
 const serviceID = "service_lr1q0vo";
 const templateID = "template_6yx972b";
-const publicKey = "public_3aB5Qxyz123AbC"; // 👉 usa aquí tu clave real
+const publicKey = "public_3aB5Qxyz123AbC";
 
-// Inicializar EmailJS (solo una vez)
+
 emailjs.init(publicKey);
 
 
@@ -15,7 +15,7 @@ emailjs.init(publicKey);
 let minTemp = null;
 let maxTemp = null;
 let emailAddress = null;
-let alertSent = false; // para no repetir alertas
+let alertSent = false; 
 
 function setTemperatureRange() {
   minTemp = parseFloat(document.getElementById("tempMin").value);
@@ -78,3 +78,4 @@ async function getData() {
 
 getData();
 setInterval(getData, 15000);
+
