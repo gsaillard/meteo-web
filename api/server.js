@@ -32,5 +32,5 @@ app.post("/save", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("API Node.js escuchando en puerto 3000");
+  console.log("API Node.js porte 3000");
 });
