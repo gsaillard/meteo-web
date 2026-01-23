@@ -1,158 +1,141 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Données météo</title>
 
-  <!-- CSS commun (même style partout) -->
-  <link rel="stylesheet" href="style_common.css" />
-
-  <!-- CSS spécifique à cette page -->
-  <link rel="stylesheet" href="style_donne.css" />
+  <link rel="stylesheet" href="style_common.css">
+  <link rel="stylesheet" href="style_donne.css">
 </head>
 
 <body>
 
-    <header>
-            <nav class="menu">
-        
-                <!-- Groupe des logos -->
-                <div class="logo-group">
-                    <a href="https://www.univ-lille.fr">
-                        <img src="iut_univ_blanc.png" class="logo-menu" alt="Logo 1">
-                    </a>
-                    <a href="https://www.univ-lille.fr">
-                        <img src="geii.png" class="logo-menu" alt="Logo 2">
-                    </a>
-                </div>
-        
-                <!-- Menu -->
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="donne.html">Mesures</a></li>
-                    <li><a href="https://thingspeak.mathworks.com/channels/3082413">Historique</a></li>
-                    <li><a href="contact.html">Contacts</a></li>
-                    <li><a href="soutien.html">Soutenez-nous !</a></li>
-                </ul>
-        
-            </nav>
-        </header>
+<header>
+  <nav class="menu">
 
-  <!-- ✅ Contenu centré sous le menu -->
-  <main class="page">
-    <h1>Données météo</h1>
-
-    <!-- ✅ 3 colonnes -->
-    <div class="page-layout-3">
-
-      <!-- COLONNE 1 : Données météo -->
-      <section class="card">
-        <h2>Données</h2>
-        <div><strong>Température :</strong> <span id="temp">Chargement...</span> °C</div>
-        <div><strong>Humidité air :</strong> <span id="hum">Chargement...</span> %</div>
-        <div><strong>Pression :</strong> <span id="press">Chargement...</span> hPa</div>
-        <div><strong>Humidité du sol :</strong> <span id="sol">Chargement...</span> %</div>
-        <div><strong>Luminosité :</strong> <span id="lum">Chargement...</span> lux</div>
-        <div><strong>Pluviométrie :</strong> <span id="pluie">Chargement...</span> mm</div>
-        <div><strong>NPK :</strong> <span id="npk">Chargement...</span></div>
-      </section>
-
-      <!-- COLONNE 2 : Réglages (ton formulaire, inchangé) -->
-      <section class="card">
-        <h2>Réglages</h2>
-
-        <h3>Température</h3>
-        <div class="row">
-          <label>Min :</label>
-          <input type="number" id="tempMin" placeholder="Min °C"> <span class="unit">°C</span>
-
-          <label class="spacer">Max :</label>
-          <input type="number" id="tempMax" placeholder="Max °C"> <span class="unit">°C</span>
-        </div>
-
-        <h3>Humidité de l'air</h3>
-        <div class="row">
-          <label>Min :</label>
-          <input type="number" id="humMin" placeholder="Min %"> <span class="unit">%</span>
-
-          <label class="spacer">Max :</label>
-          <input type="number" id="humMax" placeholder="Max %"> <span class="unit">%</span>
-        </div>
-
-        <h3>Pression atmosphérique</h3>
-        <div class="row">
-          <label>Min :</label>
-          <input type="number" id="pressMin" placeholder="Min hPa"> <span class="unit">hPa</span>
-
-          <label class="spacer">Max :</label>
-          <input type="number" id="pressMax" placeholder="Max hPa"> <span class="unit">hPa</span>
-        </div>
-
-        <h3>Humidité du sol</h3>
-        <div class="row">
-          <label>Min :</label>
-          <input type="number" id="solMin" placeholder="Min %"> <span class="unit">%</span>
-
-          <label class="spacer">Max :</label>
-          <input type="number" id="solMax" placeholder="Max %"> <span class="unit">%</span>
-        </div>
-
-        <h3>Luminosité</h3>
-        <div class="row">
-          <label>Min :</label>
-          <input type="number" id="lumMin" placeholder="Min lux"> <span class="unit">lux</span>
-
-          <label class="spacer">Max :</label>
-          <input type="number" id="lumMax" placeholder="Max lux"> <span class="unit">lux</span>
-        </div>
-
-        <h3>Pluviométrie</h3>
-        <div class="row">
-          <label>Min :</label>
-          <input type="number" id="pluieMin" placeholder="Min mm"> <span class="unit">mm</span>
-
-          <label class="spacer">Max :</label>
-          <input type="number" id="pluieMax" placeholder="Max mm"> <span class="unit">mm</span>
-        </div>
-
-        <h3>NPK</h3>
-        <div class="row">
-          <label>Min :</label>
-          <input type="number" id="npkMin" placeholder="Min">
-
-          <label class="spacer">Max :</label>
-          <input type="number" id="npkMax" placeholder="Max">
-        </div>
-
-        <h3>Adresse e-mail</h3>
-        <div class="row">
-          <input type="email" id="emailInput" placeholder="exemple@mail.com" class="email">
-        </div>
-
-        <button class="btn" onclick="saveSettings()">Enregistrer</button>
-      </section>
-
-      <!-- COLONNE 3 : Alertes / zone libre -->
-      <section class="card">
-        <h2>Alertes</h2>
-        <p class="muted">
-          Ici tu peux afficher l’état des alertes, des logs, ou un résumé des seuils.
-        </p>
-
-        <div id="popupAlertZone"></div>
-      </section>
-
+    <div class="logo-group">
+      <a href="https://www.univ-lille.fr">
+        <img src="iut_univ_blanc.png" alt="Logo 1">
+      </a>
+      <a href="https://www.univ-lille.fr">
+        <img src="geii.png" alt="Logo 2">
+      </a>
     </div>
-  </main>
 
-  <!-- Popup d'alerte -->
-  <div id="popupAlert">
-    <strong>⚠️ Alerte : </strong>
-    <span id="popupMessage"></span>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="donne.html">Mesures</a></li>
+      <li><a href="https://thingspeak.mathworks.com/channels/3082413">Historique</a></li>
+      <li><a href="contact.html">Contacts</a></li>
+      <li><a href="soutien.html">Soutenez-nous !</a></li>
+    </ul>
+
+  </nav>
+</header>
+
+<main class="page">
+  <h1 style="color:white;text-align:center;margin:0 0 25px 0;">Données météo</h1>
+
+  <div class="page-layout-3">
+
+    <!-- Colonne 1 -->
+    <section class="card">
+      <h2>Données</h2>
+      <div><strong>Température :</strong> <span id="temp">Chargement...</span> °C</div>
+      <div><strong>Humidité air :</strong> <span id="hum">Chargement...</span> %</div>
+      <div><strong>Pression :</strong> <span id="press">Chargement...</span> hPa</div>
+      <div><strong>Humidité du sol :</strong> <span id="sol">Chargement...</span> %</div>
+      <div><strong>Luminosité :</strong> <span id="lum">Chargement...</span> lux</div>
+      <div><strong>Pluviométrie :</strong> <span id="pluie">Chargement...</span> mm</div>
+      <div><strong>NPK :</strong> <span id="npk">Chargement...</span></div>
+    </section>
+
+    <!-- Colonne 2 -->
+    <section class="card">
+      <h2>Réglages</h2>
+
+      <h3>Température</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="tempMin" placeholder="Min °C"><span class="unit">°C</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="tempMax" placeholder="Max °C"><span class="unit">°C</span>
+      </div>
+
+      <h3>Humidité de l'air</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="humMin" placeholder="Min %"><span class="unit">%</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="humMax" placeholder="Max %"><span class="unit">%</span>
+      </div>
+
+      <h3>Pression atmosphérique</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="pressMin" placeholder="Min hPa"><span class="unit">hPa</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="pressMax" placeholder="Max hPa"><span class="unit">hPa</span>
+      </div>
+
+      <h3>Humidité du sol</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="solMin" placeholder="Min %"><span class="unit">%</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="solMax" placeholder="Max %"><span class="unit">%</span>
+      </div>
+
+      <h3>Luminosité</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="lumMin" placeholder="Min lux"><span class="unit">lux</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="lumMax" placeholder="Max lux"><span class="unit">lux</span>
+      </div>
+
+      <h3>Pluviométrie</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="pluieMin" placeholder="Min mm"><span class="unit">mm</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="pluieMax" placeholder="Max mm"><span class="unit">mm</span>
+      </div>
+
+      <h3>NPK</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="npkMin" placeholder="Min">
+        <label class="spacer">Max :</label>
+        <input type="number" id="npkMax" placeholder="Max">
+      </div>
+
+      <h3>Adresse e-mail</h3>
+      <div class="row">
+        <input type="email" id="emailInput" placeholder="exemple@mail.com" class="email">
+      </div>
+
+      <button class="btn" onclick="saveSettings()">Enregistrer</button>
+    </section>
+
+    <!-- Colonne 3 -->
+    <section class="card">
+      <h2>Alertes / Infos</h2>
+      <div id="popupAlertZone"></div>
+      <p style="color:#666; margin:10px 0 0;">Tu peux mettre ici un résumé, des logs ou une aide.</p>
+    </section>
+
   </div>
+</main>
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script src="script_donne.js"></script>
+<div id="popupAlert">
+  <strong>⚠️ Alerte : </strong>
+  <span id="popupMessage"></span>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="script_donne.js"></script>
 
 </body>
 </html>
+
