@@ -3,8 +3,25 @@ services:
     image: "caddy/caddy:latest"
     ports: 
       - "127.0.0.1:14009:80"
+    networks:
+      - network
     volumes:
       - "./htdocs:/public/:ro"
       - "./Caddyfile:/Caddyfile:ro"
     command: "caddy run --config /Caddyfile"
     restart: "unless-stopped"
+  
+  node:
+    
+    image: meteo-web/api
+    build: ./api
+    environment:
+      - NODE_ENV= development
+    ports:
+      - 3000:3000
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
