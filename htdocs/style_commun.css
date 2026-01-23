@@ -1,0 +1,80 @@
+
+
+
+/* ===== Base ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #4b6ef5, #3ad6a7);
+}
+
+/* ===== Header / Menu ===== */
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: top 0.3s ease; 
+}
+
+.menu {
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-group img {
+  height: 45px;
+  width: auto;
+  cursor: pointer;
+}
+
+/* Menu UL */
+.menu ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  color: white;
+  font-weight: bold;
+  padding: 15px 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.menu li:hover a {
+  background-color: #444;
+  border-radius: 5px;
+}
+
+/* ===== Zone page (contenu sous menu) ===== */
+.page {
+  margin-top: 120px; /* place menu */
+  width: min(1200px, 92%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 60px;
+}
+
+/* ===== Carte générique  ===== */
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  color
+
+

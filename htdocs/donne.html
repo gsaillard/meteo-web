@@ -3,98 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <title>Données météo</title>
+
+  <link rel="stylesheet" href="style_commun.css">
   <link rel="stylesheet" href="style_donne.css">
 </head>
 
 <body>
 
-  <h1>Données météo</h1>
+<header>
+  <nav class="menu">
 
-  <!-- ✅ AJOUT DU CONTENEUR PRINCIPAL -->
-  <div class="page-layout">
+    <div class="logo-group">
+      <a href="https://www.univ-lille.fr">
+        <img src="iut_univ_blanc.png" alt="Logo 1">
+      </a>
+      <a href="https://www.univ-lille.fr">
+        <img src="geii.png" alt="Logo 2">
+      </a>
+    </div>
 
-    <!-- ⬅️ Bloc des données météo -->
-    <div class="container">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="donne.html">Mesures</a></li>
+      <li><a href="https://thingspeak.mathworks.com/channels/3082413">Historique</a></li>
+      <li><a href="contact.html">Contacts</a></li>
+      <li><a href="soutien.html">Soutenez-nous !</a></li>
+    </ul>
+
+  </nav>
+</header>
+
+<main class="page">
+  <h1 style="color:white;text-align:center;margin:0 0 25px 0;">Données météo</h1>
+
+  <div class="page-layout-3">
+
+    <!-- Colonne 1 -->
+    <section class="card">
+      <h2>Données</h2>
       <div><strong>Température :</strong> <span id="temp">Chargement...</span> °C</div>
-      <div><strong>Humidité air:</strong> <span id="hum">Chargement...</span> %</div>
-      <div><strong>Pression atmosphérique:</strong> <span id="press">Chargement...</span> hPa</div>
+      <div><strong>Humidité air :</strong> <span id="hum">Chargement...</span> %</div>
+      <div><strong>Pression :</strong> <span id="press">Chargement...</span> hPa</div>
       <div><strong>Humidité du sol :</strong> <span id="sol">Chargement...</span> %</div>
       <div><strong>Luminosité :</strong> <span id="lum">Chargement...</span> lux</div>
       <div><strong>Pluviométrie :</strong> <span id="pluie">Chargement...</span> mm</div>
       <div><strong>NPK :</strong> <span id="npk">Chargement...</span></div>
-    </div>
+    </section>
 
-    <!-- ➡️ Bloc des réglages -->
-    
-    <div class="container">
-      <h2>Température</h2>
-      <label>Min :</label>
-      <input type="number" id="tempMin" placeholder="Min °C"> °C
-      <label style="margin-left:20px;">Max :</label>
-      <input type="number" id="tempMax" placeholder="Max °C"> °C
-      <br><br>
+    <!-- Colonne 2 -->
+    <section class="card">
+      <h2>Réglages</h2>
 
-      <h2>Humidité de l'air</h2>
-      <label>Min :</label>
-      <input type="number" id="humMin" placeholder="Min %"> %
-      <label style="margin-left:20px;">Max :</label>
-      <input type="number" id="humMax" placeholder="Max %"> %
-      <br><br>
+      <h3>Température</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="tempMin" placeholder="Min °C"><span class="unit">°C</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="tempMax" placeholder="Max °C"><span class="unit">°C</span>
+      </div>
 
-      <h2>Pression atmosphérique</h2>
-      <label>Min :</label>
-      <input type="number" id="pressMin" placeholder="Min hPa">
-      <label style="margin-left:20px;">Max :</label>
-      <input type="number" id="pressMax" placeholder="Max hPa">
-      <br><br>
+      <h3>Humidité de l'air</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="humMin" placeholder="Min %"><span class="unit">%</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="humMax" placeholder="Max %"><span class="unit">%</span>
+      </div>
 
-      <h2>Humidité du sol</h2>
-      <label>Min :</label>
-      <input type="number" id="solMin" placeholder="Min %"> %
-      <label style="margin-left:20px;">Max :</label>
-      <input type="number" id="solMax" placeholder="Max %"> %
-      <br><br>
+      <h3>Pression atmosphérique</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="pressMin" placeholder="Min hPa"><span class="unit">hPa</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="pressMax" placeholder="Max hPa"><span class="unit">hPa</span>
+      </div>
 
-      <h2>Luminosité</h2>
-      <label>Min :</label>
-      <input type="number" id="lumMin" placeholder="Min lux"> lux
-      <label style="margin-left:20px;">Max :</label>
-      <input type="number" id="lumMax" placeholder="Max lux"> lux
-      <br><br>
+      <h3>Humidité du sol</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="solMin" placeholder="Min %"><span class="unit">%</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="solMax" placeholder="Max %"><span class="unit">%</span>
+      </div>
 
-      <h2>Pluviométrie</h2>
-      <label>Min :</label>
-      <input type="number" id="pluieMin" placeholder="Min mm"> mm
-      <label style="margin-left:20px;">Max :</label>
-      <input type="number" id="pluieMax" placeholder="Max mm"> mm
-      <br><br>
+      <h3>Luminosité</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="lumMin" placeholder="Min lux"><span class="unit">lux</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="lumMax" placeholder="Max lux"><span class="unit">lux</span>
+      </div>
 
-      <h2>NPK</h2>
-      <label>Min :</label>
-      <input type="number" id="npkMin" placeholder="Min">
-      <label style="margin-left:20px;">Max :</label>
-      <input type="number" id="npkMax" placeholder="Max">
-      <br><br>
+      <h3>Pluviométrie</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="pluieMin" placeholder="Min mm"><span class="unit">mm</span>
+        <label class="spacer">Max :</label>
+        <input type="number" id="pluieMax" placeholder="Max mm"><span class="unit">mm</span>
+      </div>
 
-      <label>Adresse e-mail :</label>
-      <input type="email" id="emailInput" placeholder="exemple@mail.com" style="margin-left:10px;">
-      <br><br>
+      <h3>NPK</h3>
+      <div class="row">
+        <label>Min :</label>
+        <input type="number" id="npkMin" placeholder="Min">
+        <label class="spacer">Max :</label>
+        <input type="number" id="npkMax" placeholder="Max">
+      </div>
 
-      <button onclick="saveSettings()">Enregistrer</button>
+      <h3>Adresse e-mail</h3>
+      <div class="row">
+        <input type="email" id="emailInput" placeholder="exemple@mail.com" class="email">
+      </div>
 
-    </div>
+      <button class="btn" onclick="saveSettings()">Enregistrer</button>
+    </section>
 
-  </div> <!-- FIN DU PAGE-LAYOUT -->
+    <!-- Colonne 3 -->
+    <section class="card">
+      <h2>Alertes / Infos</h2>
+      <div id="popupAlertZone"></div>
+      <p style="color:#666; margin:10px 0 0;">Tu peux mettre ici un résumé, des logs ou une aide.</p>
+    </section>
 
-  <!-- Popup d'alerte -->
-  <div id="popupAlert">
-    <strong>⚠️ Alerte : </strong>
-    <span id="popupMessage"></span>
   </div>
+</main>
 
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script src="script_donne.js"></script>
-  <div id="popupAlertZone"></div>
+<div id="popupAlert">
+  <strong>⚠️ Alerte : </strong>
+  <span id="popupMessage"></span>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="script_donne.js"></script>
 
 </body>
 </html>
+

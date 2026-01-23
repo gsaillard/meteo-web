@@ -1,76 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Station météo agricole</title>
-    <link rel="stylesheet" href="style_index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Station météo agricole</title>
+
+  <link rel="stylesheet" href="style_commun.css">
+  <link rel="stylesheet" href="style_index.css">
 </head>
+
 <body>
 
-    <header>
-        <nav class="menu">
-    
-            <!-- Groupe des logos -->
-            <div class="logo-group">
-                <a href="https://www.univ-lille.fr">
-                    <img src="iut_univ_blanc.png" class="logo-menu" alt="Logo 1">
-                </a>
-                <a href="https://www.univ-lille.fr">
-                    <img src="geii.png" class="logo-menu" alt="Logo 2">
-                </a>
-            </div>
-    
-            <!-- Menu -->
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="donne.html">Mesures</a></li>
-                <li><a href="https://thingspeak.mathworks.com/channels/3082413">Historique</a></li>
-                <li><a href="contact.html">Contacts</a></li>
-                <li><a href="soutien.html">Soutenez-nous !</a></li>
-            </ul>
-    
-        </nav>
-    </header>
-    
-    
+<header>
+  <nav class="menu">
 
-    <!-- CONTENU PRINCIPAL EN DEUX BLOCS -->
-    <div class="home-wrapper">
-
-        <!-- ⬅️ Bloc texte -->
-        <section class="card-project">
-            <h1>Station Météorologique Agricole</h1>
-            <p>
-                Dans un contexte où les enjeux écologiques et la sécurité alimentaire prennent une importance grandissante, l’agriculture moderne s’appuie de plus en plus sur des données fiables pour optimiser la gestion des cultures. C’est dans cette dynamique que nous développons une station météo agricole autonome, pensée pour fournir en continu des mesures microclimatiques et des informations essentielles sur la qualité des sols.       
-            </p>
-
-            <p>
-                Notre solution se positionne comme un complément innovant aux outils existants tels que la spectrométrie satellitaire ou les mesures manuelles. Entièrement autonome en énergie, elle collecte et transmet régulièrement des données environnementales grâce à un ensemble de capteurs de précision (température, humidité de l’air et du sol, pression atmosphérique, pluviométrie, luminosité, fertilité du sol…).          
-            </p>  
-
-            <p>
-                L’objectif est simple : offrir aux professionnels du secteur agricole un outil durable, économique et facile à déployer, leur permettant de suivre l’évolution de leurs parcelles, d’anticiper les besoins de leurs cultures et d’appuyer leurs décisions sur des données fiables.
-            </p>
-     
-     
-            <p>
-                Grâce à une interface communicante à longue portée et un site web dédié, les informations collectées sont consultables à tout moment, facilitant l’analyse et le pilotage quotidien.
-            </p>     
-     
-            <p>
-                Notre engagement : fournir un système complet, documenté et robuste, adapté aux exigences réelles du terrain et aux attentes des utilisateurs.
-            </p>
-        </section>
-
-        <!-- ➡️ Bloc image -->
-        <section class="card-image">
-            <img src="tracteur.jpeg" alt=" ">
-        </section>
-
+    <div class="logo-group">
+      <a href="https://www.univ-lille.fr">
+        <img src="iut_univ_blanc.png" alt="Logo 1">
+      </a>
+      <a href="https://www.univ-lille.fr">
+        <img src="geii.png" alt="Logo 2">
+      </a>
     </div>
-    <button id="scrollTopBtn">↑</button>
-    <script src="script_index.js"></script>
+
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="donne.html">Mesures</a></li>
+      <li><a href="https://thingspeak.mathworks.com/channels/3082413">Historique</a></li>
+      <li><a href="contact.html">Contacts</a></li>
+      <li><a href="soutien.html">Soutenez-nous !</a></li>
+    </ul>
+
+  </nav>
+</header>
+
+<main class="page">
+  <div class="home-wrapper">
+
+    <section class="card card-project">
+      <h1>Station Météorologique Agricole</h1>
+
+      <p>Dans un contexte où les enjeux écologiques et la sécurité alimentaire prennent une importance grandissante, l’agriculture moderne s’appuie de plus en plus sur des données fiables pour optimiser la gestion des cultures. C’est dans cette dynamique que nous développons une station météo agricole autonome, pensée pour fournir en continu des mesures microclimatiques et des informations essentielles sur la qualité des sols.</p>
+
+      <p>Notre solution se positionne comme un complément innovant aux outils existants tels que la spectrométrie satellitaire ou les mesures manuelles. Entièrement autonome en énergie, elle collecte et transmet régulièrement des données environnementales grâce à un ensemble de capteurs de précision (température, humidité de l’air et du sol, pression atmosphérique, pluviométrie, luminosité, fertilité du sol…).</p>
+
+      <p>L’objectif est simple : offrir aux professionnels du secteur agricole un outil durable, économique et facile à déployer, leur permettant de suivre l’évolution de leurs parcelles, d’anticiper les besoins de leurs cultures et d’appuyer leurs décisions sur des données fiables.</p>
+
+      <p>Grâce à une interface communicante à longue portée et un site web dédié, les informations collectées sont consultables à tout moment, facilitant l’analyse et le pilotage quotidien.</p>
+
+      <p>Notre engagement : fournir un système complet, documenté et robuste, adapté aux exigences réelles du terrain et aux attentes des utilisateurs.</p>
+    </section>
+
+    <section class="card card-image">
+      <img src="tracteur.jpeg" alt="">
+    </section>
+
+  </div>
+</main>
+
+<button id="scrollTopBtn">↑</button>
+<script src="script_index.js"></script>
+
 </body>
 </html>
+
 
