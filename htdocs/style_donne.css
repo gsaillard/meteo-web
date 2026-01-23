@@ -1,4 +1,4 @@
-/* ===== 3 colonnes ===== */
+
 .page-layout-3 {
   display: grid;
   grid-template-columns: 320px 1fr 280px;
@@ -6,65 +6,49 @@
   align-items: start;
 }
 
-/* Responsive */
 @media (max-width: 1100px) {
   .page-layout-3 {
     grid-template-columns: 1fr;
   }
 }
 
-/* Mise en forme du formulaire */
-.row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+/* Mise en forme formulaire (propre) */
+.row{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.row label {
+.row label{
   min-width: 45px;
   font-weight: bold;
 }
 
-.row .spacer {
+.row .spacer{
   margin-left: 14px;
 }
 
-.row input {
+.row input{
   width: 120px;
   padding: 7px 9px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  outline: none;
+  outline:none;
 }
 
-.row .email {
+.row .email{
   width: min(360px, 100%);
 }
 
-.unit {
+.unit{
+  color:#666;
   margin-right: 10px;
-  color: #666;
 }
 
-.btn {
-  margin-top: 10px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 12px;
-  background: #333;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background: #444;
-}
-
-/* Popup alerte */
-#popupAlert {
+/* Popup d’alerte (si ton JS l’affiche) */
+#popupAlert{
   position: fixed;
   left: 50%;
   bottom: 20px;
@@ -73,6 +57,6 @@
   padding: 12px 16px;
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-  display: none; /* géré par JS */
+  display: none;
   z-index: 9999;
 }
