@@ -11,6 +11,7 @@ header {
   top: 0; left: 0;
   width: 100%;
   z-index: 1000;
+  transition: top 0.3s ease; 
 }
 
 .menu {
@@ -33,6 +34,7 @@ header {
   cursor: pointer;
 }
 
+/* Menu UL */
 .menu ul {
   display: flex;
   align-items: center;
@@ -55,42 +57,21 @@ header {
   border-radius: 5px;
 }
 
-/* ===== Zone de contenu ===== */
+/* ===== Zone page (contenu sous menu) ===== */
 .page {
-  margin-top: 110px;                 /* place pour le menu fixe */
+  margin-top: 120px; /* place menu */
   width: min(1200px, 92%);
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 60px;
 }
 
-.page h1 {
-  margin: 0 0 25px 0;
-  color: white;
-  text-align: center;
-}
-
-/* ===== Carte (style uniforme partout) ===== */
+/* ===== Carte générique  ===== */
 .card {
   background: white;
-  padding: 28px;
+  padding: 40px;
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-  color: #333;
-}
+  color
 
-.card h2 {
-  margin: 0 0 12px 0;
-}
-
-.card h3 {
-  margin: 18px 0 10px 0;
-  font-size: 16px;
-}
-
-.muted {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.5;
-}
 
