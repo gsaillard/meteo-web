@@ -1,4 +1,10 @@
 :80 {
-    root * /public
-    file_server
+    handle /api/* {
+        reverse_proxy node:3000
+    }
+    
+    handle {
+        root * /public
+        file_server
+    }
 }

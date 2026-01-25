@@ -12,16 +12,15 @@ services:
     restart: "unless-stopped"
   
   node:
-    
     image: meteo-web/api
     build: ./api
     environment:
       - NODE_ENV= development
     ports:
-      - 3000:3000
+      - "3000:3000"
     networks:
       - network
 
-networks:
+networks: 
   network:
     driver: bridge

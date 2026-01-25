@@ -16,12 +16,12 @@ db.run(`
 `);
 
 // Endpoint de test
-app.get("/ping", (req, res) => {
+app.get("/api/ping", (req, res) => {
   res.json({ message: "API OK" });
 });
 
 // enregistrer la valeur
-app.post("/save", (req, res) => {
+app.post("/api/save", (req, res) => {
   const valeur = req.body.valeur;
 
   db.run(
