@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 // Base des donnes SQLite
-const db = new sqlite3.Database("data.db");
+const db = new sqlite3.Database("/db/data.db");
 
 // Create a table
 db.run(`

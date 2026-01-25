@@ -16,6 +16,8 @@ services:
     build: ./api
     environment:
       - NODE_ENV= development
+    volumes:
+      - "./db/:/db/"
     ports:
       - "3000:3000"
     networks:
@@ -24,3 +26,4 @@ services:
 networks: 
   network:
     driver: bridge
+
