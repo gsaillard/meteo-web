@@ -1,5 +1,4 @@
-const channelID = "3082413";
-const readAPIKey = "5JB70C4NNIXQ88CS";
+
 
 /********************************************
  * SEUILS
@@ -64,7 +63,7 @@ function saveSettings() {
 
   localStorage.setItem("seuils", JSON.stringify(seuils));
 
-  fetch("http://localhost:3000/seuils", {
+  fetch("https://sma.wirescape.net/api/seuils", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(seuils)
@@ -77,9 +76,7 @@ function saveSettings() {
  * AFFICHAGE DATA
  ********************************************/
 async function getData() {
-  const res = await fetch(
-    `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`
-  );
+  const res = await fetch("https://sma.wirescape.net/api/data");
   const data = await res.json();
 
   const valeurs = {
