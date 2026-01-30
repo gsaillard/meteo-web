@@ -1,15 +1,13 @@
 const fetch = require("node-fetch");
 const nodemailer = require("nodemailer");
+const express = require("express");
 
-/********************************************
- * CONFIGURATION THINGSPEAK
- ********************************************/
+const app = express();
+app.use(express.json());
+
 const channelID = "3082413";
 const readAPIKey = "5JB70C4NNIXQ88CS";
 
-/********************************************
- * SEUILS (reçus du frontend)
- ********************************************/
 let seuils = {
   temperature: { min: null, max: null },
   humiditeAir: { min: null, max: null },
@@ -21,9 +19,6 @@ let seuils = {
   email: null
 };
 
-/********************************************
- * EMAIL CONFIG
- ********************************************/
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -32,22 +27,26 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-/********************************************
- * RECEVOIR SEUILS DU FRONTEND
- ********************************************/
-const express = require("express");
-const app = express();
-app.use(express.json());
+// ✅ API DATA
+app.get("/api/data", async (req, res) => {
+  try {
+    const r = await fetch(
+      `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`
+    );
+    const data = await r.json();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: "ThingSpeak error" });
+  }
+});
 
-app.post("/seuils", (req, res) => {
+// ✅ API SEUILS
+app.post("/api/seuils", (req, res) => {
   seuils = req.body;
   console.log("Seuils reçus :", seuils);
   res.json({ status: "ok" });
 });
 
-/********************************************
- * ENVOI EMAIL
- ********************************************/
 async function sendEmailAlert(type, valeur, message) {
   if (!seuils.email) return;
 
@@ -61,9 +60,6 @@ async function sendEmailAlert(type, valeur, message) {
   console.log("Mail envoyé :", message);
 }
 
-/********************************************
- * LECTURE THINGSPEAK
- ********************************************/
 async function getData() {
   try {
     const res = await fetch(
@@ -97,9 +93,7 @@ async function getData() {
       if (max !== null && value > max)
         message = `${type} trop haut : ${value} (max ${max})`;
 
-      if (message) {
-        sendEmailAlert(type, value, message);
-      }
+      if (message) sendEmailAlert(type, value, message);
     });
 
   } catch (err) {
