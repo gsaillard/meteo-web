@@ -236,7 +236,7 @@ async function getData() {
 
     } catch (err) {
         console.error("Erreur connexion :", err);
-        showPopup("Erreur de connexion à ThingSpeak ❌");
+        showPopup("Erreur de connexion au serveur ❌");
     }
 }
 
@@ -245,6 +245,7 @@ async function getData() {
  ********************************************/
 getData();
 setInterval(getData, 15000);
+
 
 
 
