@@ -1,6 +1,5 @@
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
-const fetch = require("node-fetch");
 const channelID = "3082413";
 const readAPIKey = "5JB70C4NNIXQ88CS";
 
@@ -9,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 // Base des donnes SQLite
-const db = new sqlite3.Database("/db/data.db");
+const db = new sqlite3.Database("./db/data.db");
 
 // Create a table
 db.run(`
