@@ -1,10 +1,3 @@
-/********************************************
- * CONFIGURATION THINGSPEAK + EMAILJS
- ********************************************/
-const channelID = "3082413"; // de the things network 
-const readAPIKey = "5JB70C4NNIXQ88CS"; // thingspeak
-
-
 const serviceID = "service_lr1q0vo";
 const templateID = "template_6yx972b";
 const publicKey = "orh7fcXTodNnxafOX";
@@ -252,5 +245,6 @@ async function getData() {
  ********************************************/
 getData();
 setInterval(getData, 15000);
+
 
 
