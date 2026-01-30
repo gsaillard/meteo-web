@@ -1,11 +1,18 @@
-
 body {
   font-family: Arial, sans-serif;
-  /*text-align: center;*/
   background: #f7f7f7;
   padding: 40px;
 }
+
 h1 {
+  color: #0078d7;
+  margin-bottom: 30px;
+}
+
+.container {
+  display: inline-block;
+  text-align: left;
+  background: white;
   padding: 20px 40px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -25,19 +32,7 @@ h1 {
   margin: 10px 0;
 }
 
-.parametres {
-  margin-top: 30px;
-  background: white;
-  padding: 15px 25px;
-  border-radius: 10px;
-  width: 320px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-}
 
-.parametres input {
-  width: 60px;
-  margin: 5px;
-  padding: 3px;
 /* Popup non bloquante */
 #popupAlert {
   display:none;
@@ -54,13 +49,6 @@ h1 {
   max-width:300px;
 }
 
-.parametres button {
-  background: #0078d7;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
 #popupAlertZone {
   position: fixed;
   top: 20px;
@@ -71,8 +59,6 @@ h1 {
   z-index: 99999;
 }
 
-.parametres button:hover {
-  background: #005fa3;
 .popupAlert {
   background: white;
   padding: 12px 18px;
