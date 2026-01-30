@@ -1,8 +1,11 @@
-const serviceID = "service_lr1q0vo";
-const templateID = "template_6yx972b";
-const publicKey = "orh7fcXTodNnxafOX";
+/********************************************
+ * CONFIGURATION THINGSPEAK + EMAILJS
+ ********************************************/
+const channelID = "3082413"; // de the things network 
+const readAPIKey = "5JB70C4NNIXQ88CS"; // thingspeak
 
-emailjs.init(publicKey);
+
+
 
 /********************************************
  * OBJET DES SEUILS
@@ -132,51 +135,6 @@ function saveSettings() {
     showPopup("Paramètres enregistrés ✔");
 }
 
-/********************************************
- * ENVOI D’EMAIL
- ********************************************/
-async function sendEmailAlert(type, valeur, message) {
-    if (!seuils.email) return;
-
-    const typeHuman = names[type] || type; // ← transforme le nom technique en joli nom
-
-    const params = {
-        to_email: seuils.email,
-        alert_type: typeHuman,
-        value: valeur,
-        message: message
-    };
-
-    try {
-        await emailjs.send(serviceID, templateID, params);
-        console.log("Email envoyé !");
-    } catch (error) {
-        console.error("Erreur email :", error);
-    }
-}
-
-
-/********************************************
- * ALERTES RÉPÉTITIVES
- ********************************************/
-let repeatTimers = {};
-
-function startRepeatAlerts(type, value, message) {
-    if (repeatTimers[type]) return;
-
-    repeatTimers[type] = setInterval(() => {
-        showPopup(message);
-        sendEmailAlert(type, value, message);
-    }, 5 * 60 * 60 * 1000); // 5 heures, pour 1 min: 1 * 60 * 1000  
-
-}
-
-function stopRepeatAlerts(type) {
-    if (repeatTimers[type]) {
-        clearInterval(repeatTimers[type]);
-        repeatTimers[type] = null;
-    }
-}
 
 /********************************************
  * LECTURE DES DONNÉES THINGSPEAK
@@ -184,7 +142,6 @@ function stopRepeatAlerts(type) {
 async function getData() {
     try {
         const res = await fetch("http://localhost:3000/api/data");
-
         const data = await res.json();
 
         const valeurs = {
@@ -220,23 +177,11 @@ async function getData() {
 
             if (max !== null && value > max)
               message = `${typeHuman} trop haut : ${value} (max ${max})`;
-
-
-            if (message) {
-                // alerte immédiate
-                if (!repeatTimers[type]) {
-                    showPopup(message);
-                    sendEmailAlert(type, value, message);
-                }
-                startRepeatAlerts(type, value, message);
-            } else {
-                stopRepeatAlerts(type);
-            }
         });
 
     } catch (err) {
         console.error("Erreur connexion :", err);
-        showPopup("Erreur de connexion au serveur ❌");
+        showPopup("Erreur de connexion❌");
     }
 }
 
@@ -245,6 +190,7 @@ async function getData() {
  ********************************************/
 getData();
 setInterval(getData, 15000);
+
 
 
 
