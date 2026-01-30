@@ -104,3 +104,4 @@ async function getData() {
 setInterval(getData, 15000);
 
 app.listen(3000, () => console.log("Backend actif sur port 3000"));
+
