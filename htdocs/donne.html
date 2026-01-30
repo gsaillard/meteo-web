@@ -1,7 +1,7 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Données météo - ThingSpeak</title>
   <title>Données météo</title>
   <link rel="stylesheet" href="style_donne.css">
 </head>
@@ -10,15 +10,6 @@
 
   <h1>Données météo</h1>
 
-  <div class="container">
-    <div><strong>Température :</strong> <span id="temp">Chargement...</span> °C</div>
-    <div><strong>Humidité air:</strong> <span id="hum">Chargement...</span> %</div>
-    <div><strong>Pression atmosphérique:</strong> <span id="press">Chargement...</span> hPa</div>
-    <div><strong>Humidité du sol :</strong> <span id="sol">Chargement...</span> %</div>
-    <div><strong>Luminosité :</strong> <span id="lum">Chargement...</span> lux</div>
-    <div><strong>Pluviométrie :</strong> <span id="pluie">Chargement...</span> mm</div>
-    <div><strong>NPK :</strong> <span id="npk">Chargement...</span></div>
-  </div>
   <!-- ✅ AJOUT DU CONTENEUR PRINCIPAL -->
   <div class="page-layout">
 
@@ -64,21 +55,6 @@
       <input type="number" id="solMax" placeholder="Max %"> %
       <br><br>
 
-<div class="container">
-  <h2>Réglage de température</h2>
-  <label for="tempMin">Min :</label>
-  <input type="number" id="tempMin" placeholder="Min °C"> °C
-  <label for="tempMax">Max :</label>
-  <input type="number" id="tempMax" placeholder="Max °C"> °C
-  <br><br>
-  
-  <!--email -->
-  <label for="emailInput">Adresse e-mail :</label>
-  <input type="email" id="emailInput" placeholder="exemple@mail.com" style="margin-left: 10px;">
-  
-  <br><br>
-  <button onclick="setTemperatureRange()">Enregistrer</button>
-</div>
       <h2>Luminosité</h2>
       <label>Min :</label>
       <input type="number" id="lumMin" placeholder="Min lux"> lux
