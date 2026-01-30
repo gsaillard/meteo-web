@@ -190,9 +190,7 @@ function stopRepeatAlerts(type) {
  ********************************************/
 async function getData() {
     try {
-        const res = await fetch(
-            `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`
-        );
+        const res = await fetch("http://localhost:3000/api/data");
 
         const data = await res.json();
 
@@ -254,4 +252,5 @@ async function getData() {
  ********************************************/
 getData();
 setInterval(getData, 15000);
+
 
