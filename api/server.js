@@ -1,5 +1,6 @@
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
+const fetch = global.fetch;
 const channelID = "3082413";
 const readAPIKey = "5JB70C4NNIXQ88CS";
 
