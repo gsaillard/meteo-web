@@ -4,9 +4,6 @@
 const channelID = "3082413"; // de the things network 
 const readAPIKey = "5JB70C4NNIXQ88CS"; // thingspeak
 
-
-
-
 /********************************************
  * OBJET DES SEUILS
  ********************************************/
@@ -131,15 +128,11 @@ function saveSettings() {
 
     // sauvegarde locale
     localStorage.setItem("seuils", JSON.stringify(seuils));
-<<<<<<< HEAD
-=======
-    fetch("http://localhost:3000/api/seuils", {
+    fetch("/api/seuils", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(seuils)
 });
-
->>>>>>> add3e61f485f85c789338f9506bb082efd77cf26
 
     showPopup("Paramètres enregistrés ✔");
 }
@@ -150,7 +143,7 @@ function saveSettings() {
  ********************************************/
 async function getData() {
     try {
-        const res = await fetch("http://localhost:3000/api/data");
+        const res = await fetch("/api/data");
         const data = await res.json();
 
         const valeurs = {
@@ -199,12 +192,3 @@ async function getData() {
  ********************************************/
 getData();
 setInterval(getData, 15000);
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
->>>>>>> add3e61f485f85c789338f9506bb082efd77cf26
