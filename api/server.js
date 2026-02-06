@@ -43,7 +43,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "stationmeteosae@gmail.com",
-    pass: "MOT_DE_PASSE_APP"
+    pass: "rstg npvn fwbr siwk"
   }
 });
 
