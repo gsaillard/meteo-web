@@ -131,6 +131,15 @@ function saveSettings() {
 
     // sauvegarde locale
     localStorage.setItem("seuils", JSON.stringify(seuils));
+<<<<<<< HEAD
+=======
+    fetch("http://localhost:3000/api/seuils", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(seuils)
+});
+
+>>>>>>> add3e61f485f85c789338f9506bb082efd77cf26
 
     showPopup("Paramètres enregistrés ✔");
 }
@@ -190,3 +199,12 @@ async function getData() {
  ********************************************/
 getData();
 setInterval(getData, 15000);
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+>>>>>>> add3e61f485f85c789338f9506bb082efd77cf26
