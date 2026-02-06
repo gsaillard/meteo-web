@@ -8,6 +8,7 @@
   "dependencies": {
     "express": "^4.22.1",
     "node-fetch": "^3.3.2",
+    "nodemailer": "^8.0.0",
     "sqlite3": "^5.1.7"
   }
 }
