@@ -15,12 +15,49 @@ app.use(express.json());
  ********************************************/
 const db = new sqlite3.Database("./db/data.db");
 
-db.run(`
-  CREATE TABLE IF NOT EXISTS mesures (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    valeur REAL
-  )
-`);
+db.serialize(() => {
+
+    // TABLE MESURES
+    db.run(`
+        CREATE TABLE IF NOT EXISTS mesures (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            temperature REAL,
+            humiditeAir REAL,
+            pression REAL,
+            humiditeSol REAL,
+            luminosite REAL,
+            pluie REAL,
+            npk REAL
+        )
+    `);
+
+    // TABLE SEUILS
+    db.run(`
+        CREATE TABLE IF NOT EXISTS seuils (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            type TEXT,
+            min REAL,
+            max REAL,
+            email TEXT
+        )
+    `);
+
+    // TABLE ALERTES
+    db.run(`
+        CREATE TABLE IF NOT EXISTS alertes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            type TEXT,
+            valeur REAL,
+            message TEXT,
+            email TEXT
+        )
+    `);
+
+});
+
 
 /********************************************
  * SEUILS
@@ -79,6 +116,20 @@ app.get("/api/data", async (req, res) => {
       `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`
     );
     const data = await r.json();
+     db.run(
+      `INSERT INTO mesures
+       (temperature, humiditeAir, pression, humiditeSol, luminosite, pluie, npk)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [
+        parseFloat(data.field1) || null,
+        parseFloat(data.field2) || null,
+        parseFloat(data.field3) || null,
+        parseFloat(data.field4) || null,
+        parseFloat(data.field5) || null,
+        parseFloat(data.field6) || null,
+        parseFloat(data.field7) || null
+      ]
+    );
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: "ThingSpeak error" });
