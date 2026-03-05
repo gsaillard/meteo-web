@@ -137,56 +137,6 @@ function saveSettings() {
     showPopup("Paramètres enregistrés ✔");
 }
 
-
-/********************************************
- * LECTURE DES DONNÉES THINGSPEAK
- ********************************************/
-async function getData() {
-    try {
-        const res = await fetch("/api/data");
-        const data = await res.json();
-
-        const valeurs = {
-            temperature: parseFloat(data.field1),
-            humiditeAir: parseFloat(data.field2),
-            pression: parseFloat(data.field3),
-            humiditeSol: parseFloat(data.field4),
-            luminosite: parseFloat(data.field5),
-            pluie: parseFloat(data.field6),
-            npk: parseFloat(data.field7)
-        };
-
-        // affichage
-        Object.keys(valeurs).forEach(key => {
-            document.getElementById(idMap[key]).textContent =
-                !isNaN(valeurs[key]) ? valeurs[key] : "—";
-        });
-
-        // vérification des seuils
-        Object.keys(valeurs).forEach(type => {
-            let value = valeurs[type];
-            if (isNaN(value)) return;
-
-            let min = seuils[type].min;
-            let max = seuils[type].max;
-
-            let message = null;
-
-            const typeHuman = names[type];
-
-            if (min !== null && value < min)
-              message = `${typeHuman} trop bas : ${value} (min ${min})`;
-
-            if (max !== null && value > max)
-              message = `${typeHuman} trop haut : ${value} (max ${max})`;
-        });
-
-    } catch (err) {
-        console.error("Erreur connexion :", err);
-        showPopup("Erreur de connexion❌");
-    }
-}
-
 /********************************************
  * MISE À JOUR AUTOMATIQUE
  ********************************************/

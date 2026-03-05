@@ -1,23 +1,19 @@
+//webhoot
 const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const nodemailer = require("nodemailer");
-
-const fetch = global.fetch;
-
-const channelID = "3082413";
-const readAPIKey = "5JB70C4NNIXQ88CS";
+const path = require("path");
 
 const app = express();
 app.use(express.json());
 
 /********************************************
- * BASE DE DONNÉES
+ * BASE DE DATOS
  ********************************************/
 const db = new sqlite3.Database("./db/data.db");
 
 db.serialize(() => {
 
-    // TABLE MESURES
     db.run(`
         CREATE TABLE IF NOT EXISTS mesures (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,19 +28,6 @@ db.serialize(() => {
         )
     `);
 
-    // TABLE SEUILS
-    db.run(`
-        CREATE TABLE IF NOT EXISTS seuils (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            type TEXT,
-            min REAL,
-            max REAL,
-            email TEXT
-        )
-    `);
-
-    // TABLE ALERTES
     db.run(`
         CREATE TABLE IF NOT EXISTS alertes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,20 +41,11 @@ db.serialize(() => {
 
 });
 
-
 /********************************************
  * SEUILS
  ********************************************/
-let seuils = {
-  temperature: { min: null, max: null },
-  humiditeAir: { min: null, max: null },
-  pression: { min: null, max: null },
-  humiditeSol: { min: null, max: null },
-  luminosite: { min: null, max: null },
-  pluie: { min: null, max: null },
-  npk: { min: null, max: null },
-  email: null
-};
+let seuils = {};
+let lastAlertSent = {};
 
 /********************************************
  * EMAIL CONFIG
@@ -84,130 +58,102 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// eviter spam
-let lastAlertSent = {};
-
 /********************************************
  * ENDPOINTS
  ********************************************/
+
+// recibir seuils del frontend
 app.post("/api/seuils", (req, res) => {
   seuils = req.body;
-  console.log("Seuils reçus :", seuils);
   res.json({ status: "ok" });
 });
 
-app.get("/api/ping", (req, res) => {
-  res.json({ message: "API OK" });
-});
-
-app.post("/api/save", (req, res) => {
-  const valeur = req.body.valeur;
-
-  db.run(
-    "INSERT INTO mesures(valeur) VALUES (?)",
-    [valeur],
-    () => res.json({ status: "saved", valeur })
-  );
-});
-
-app.get("/api/data", async (req, res) => {
-  try {
-    const r = await fetch(
-      `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`
+// devolver última medida
+app.get("/api/mesures/last", (req, res) => {
+    db.get(
+        "SELECT * FROM mesures ORDER BY id DESC LIMIT 1",
+        (err, row) => {
+            if (err) return res.status(500).json({ error: err });
+            res.json(row);
+        }
     );
-    const data = await r.json();
-     db.run(
-      `INSERT INTO mesures
-       (temperature, humiditeAir, pression, humiditeSol, luminosite, pluie, npk)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [
-        parseFloat(data.field1) || null,
-        parseFloat(data.field2) || null,
-        parseFloat(data.field3) || null,
-        parseFloat(data.field4) || null,
-        parseFloat(data.field5) || null,
-        parseFloat(data.field6) || null,
-        parseFloat(data.field7) || null
-      ]
-    );
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: "ThingSpeak error" });
-  }
 });
 
 /********************************************
- * EMAIL FUNCTION
+ * WEBHOOK TTN
  ********************************************/
-async function sendEmailAlert(type, message) {
-  if (!seuils.email) return;
+app.post("/api/ttn", async (req, res) => {
 
-  await transporter.sendMail({
-    from: "TON_EMAIL@gmail.com",
-    to: seuils.email,
-    subject: `Alerte ${type}`,
-    text: message
-  });
+    const payload = req.body.uplink_message?.decoded_payload;
 
-  console.log("Mail envoyé :", message);
-}
-
-/********************************************
- * VERIFICATION AUTOMATIQUE
- ********************************************/
-async function checkDataAndAlert() {
-  try {
-    const r = await fetch(
-      `https://api.thingspeak.com/channels/${channelID}/feeds/last.json?api_key=${readAPIKey}`
-    );
-
-    const data = await r.json();
+    if (!payload) {
+        return res.status(400).json({ error: "No payload" });
+    }
 
     const valeurs = {
-      temperature: parseFloat(data.field1),
-      humiditeAir: parseFloat(data.field2),
-      pression: parseFloat(data.field3),
-      humiditeSol: parseFloat(data.field4),
-      luminosite: parseFloat(data.field5),
-      pluie: parseFloat(data.field6),
-      npk: parseFloat(data.field7)
+        temperature: payload.field1,
+        humiditeAir: payload.field2,
+        pression: payload.field3,
+        humiditeSol: payload.field4,
+        luminosite: payload.field5,
+        pluie: payload.field6,
+        npk: payload.field7
     };
 
-    Object.keys(valeurs).forEach(type => {
-      const value = valeurs[type];
-      if (isNaN(value)) return;
+    // guardar en base de datos
+    db.run(
+        `INSERT INTO mesures
+        (temperature, humiditeAir, pression, humiditeSol, luminosite, pluie, npk)
+        VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        Object.values(valeurs)
+    );
 
-      const min = seuils[type].min;
-      const max = seuils[type].max;
+    // verificar alertas
+    Object.keys(valeurs).forEach(async type => {
 
-      let message = null;
+        const value = valeurs[type];
+        if (!seuils[type]) return;
 
-      if (min !== null && value < min)
-        message = `${type} trop bas : ${value} (min ${min})`;
+        const min = seuils[type].min;
+        const max = seuils[type].max;
 
-      if (max !== null && value > max)
-        message = `${type} trop haut : ${value} (max ${max})`;
+        let message = null;
 
-      if (message) {
-        // Evite spam : 1 mail max par type toutes les 5 minutes
-        const now = Date.now();
-        if (!lastAlertSent[type] || now - lastAlertSent[type] > 300000) {
-          sendEmailAlert(type, message);
-          lastAlertSent[type] = now;
+        if (min !== null && value < min)
+            message = `${type} trop bas : ${value}`;
+
+        if (max !== null && value > max)
+            message = `${type} trop haut : ${value}`;
+
+        if (message) {
+            const now = Date.now();
+            if (!lastAlertSent[type] || now - lastAlertSent[type] > 300000) {
+
+                await transporter.sendMail({
+                    from: "stationmeteosae@gmail.com",
+                    to: seuils.email,
+                    subject: `Alerte ${type}`,
+                    text: message
+                });
+
+                db.run(
+                    `INSERT INTO alertes (type, valeur, message, email)
+                     VALUES (?, ?, ?, ?)`,
+                    [type, value, message, seuils.email]
+                );
+
+                lastAlertSent[type] = now;
+            }
         }
-      }
     });
 
-  } catch (err) {
-    console.error("Erreur ThingSpeak :", err);
-  }
-}
+    res.status(200).json({ status: "saved" });
+});
 
-setInterval(checkDataAndAlert, 15000);
-
-
-const path = require("path");  // retirer si pas de recup de donnes 
-app.use(express.static(path.join(__dirname, "../htdocs"))); // retirer si pas de recup de donnes 
+/********************************************
+ * STATIC FILES
+ ********************************************/
+app.use(express.static(path.join(__dirname, "../htdocs")));
 
 app.listen(3000, () => {
   console.log("Backend actif sur port 3000");
