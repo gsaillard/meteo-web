@@ -2,12 +2,38 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Données météo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Station météo agricole</title>
+
+  <link rel="stylesheet" href="style_commun.css">
   <link rel="stylesheet" href="style_donne.css">
 </head>
 
 <body>
 
+<header>
+  <nav class="menu">
+
+    <div class="logo-group">
+      <a href="https://www.univ-lille.fr">
+        <img src="iut_univ_blanc.png" alt="Logo 1">
+      </a>
+      <a href="https://www.univ-lille.fr">
+        <img src="geii.png" alt="Logo 2">
+      </a>
+    </div>
+
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="donne.html">Mesures</a></li>
+      <li><a href="historique.html">Historique</a></li>
+      <li><a href="contact.html">Contacts</a></li>
+      <li><a href="aide.html">Aide</a></li>
+    </ul>
+
+  </nav>
+</header>
+ <main class="page">
   <h1>Données météo</h1>
 
   <!-- ✅ AJOUT DU CONTENEUR PRINCIPAL -->
@@ -93,6 +119,9 @@
   </div>
 
   <script src="/script_donne.js"></script>
+
+  <button id="scrollTopBtn">↑</button>
+  <script src="script_commun.js"></script>
   
   <div id="popupAlertZone"></div>
 
